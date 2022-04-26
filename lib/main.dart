@@ -41,41 +41,35 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: RepaintBoundary(
-        child: SizedBox(
-          height: 400.0,
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                InteractiveCard(
-                  image:
-                      'https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80',
-                  index: 0,
-                ),
-                InteractiveCard(
-                  image:
-                      'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
-                  index: 1,
-                ),
-                InteractiveCard(
-                  image:
-                      'https://images.unsplash.com/photo-1485893226355-9a1c32a0c81e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-                  index: 2,
-                ),
-              ],
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            InteractiveCard(
+              image:
+                  'https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80',
+              index: 0,
             ),
-          ),
+            InteractiveCard(
+              image:
+                  'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
+              index: 1,
+            ),
+            InteractiveCard(
+              image:
+                  'https://images.unsplash.com/photo-1485893226355-9a1c32a0c81e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+              index: 2,
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-int selectedIndex = -1;
 StreamController<int> controller = StreamController<int>.broadcast();
-Stream<int> stream = controller.stream.asBroadcastStream();
+Stream<int> stream = controller.stream;
 
 class InteractiveCard extends StatefulWidget {
   final String image;
@@ -102,9 +96,12 @@ class _InteractiveCardState extends State<InteractiveCard>
   @override
   void initState() {
     _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 375));
-    _animation = Tween(begin: 0.0, end: -math.pi / 6)
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
+      vsync: this,
+      duration: const Duration(milliseconds: 375),
+    );
+    _animation = Tween(begin: 0.0, end: -math.pi / 6).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.ease),
+    );
     super.initState();
   }
 
