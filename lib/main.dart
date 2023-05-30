@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/gestures.dart';
+// import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/rendering.dart';
 
 import 'dart:math' as math;
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,27 +39,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             InteractiveCard(
               image:
-                  'https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80',
+                  'https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
               index: 0,
+              title: 'Charlotte',
             ),
             InteractiveCard(
               image:
                   'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
               index: 1,
+              title: 'Penelope',
             ),
             InteractiveCard(
               image:
-                  'https://images.unsplash.com/photo-1485893226355-9a1c32a0c81e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
+                  'https://images.unsplash.com/photo-1485893226355-9a1c32a0c81e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
               index: 2,
+              title: 'Aiden',
             ),
           ],
         ),
@@ -97,7 +100,7 @@ class _InteractiveCardState extends State<InteractiveCard>
   void initState() {
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 375),
+      duration: const Duration(milliseconds: 300),
     );
     _animation = Tween(begin: 0.0, end: -math.pi / 6).animate(
       CurvedAnimation(parent: _controller, curve: Curves.ease),
@@ -140,7 +143,7 @@ class _InteractiveCardState extends State<InteractiveCard>
             child: AnimatedBuilder(
               animation: _animation,
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 375),
+                duration: const Duration(milliseconds: 300),
                 height: (snapshot.data != -1 && widget.index == snapshot.data)
                     ? 380.0
                     : 300.0,
@@ -167,16 +170,14 @@ class _InteractiveCardState extends State<InteractiveCard>
                       height: 400.0,
                       width: 400.0,
                     ),
-                    LayoutBuilder(
-                      builder: (context, child) {
-                        return AnimatedOpacity(
-                          duration: const Duration(milliseconds: 375),
+                    AnimatedOpacity(
+                          duration: const Duration(milliseconds: 300),
                           opacity: (snapshot.data != -1 &&
                                   widget.index == snapshot.data)
                               ? 1.0
                               : 0.0,
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 375),
+                            duration: const Duration(milliseconds: 300),
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
                               color: Colors.blue[200]!.withOpacity(0.7),
@@ -203,10 +204,10 @@ class _InteractiveCardState extends State<InteractiveCard>
                                     children: [
                                       Text(
                                         widget.title ?? 'Title',
-                                        style: GoogleFonts.montserrat(
+                                        style: GoogleFonts.kaushanScript(
                                             fontWeight: FontWeight.w800,
                                             color: Colors.black,
-                                            fontSize: 20.0),
+                                            fontSize: 34.0),
                                       ),
                                       const SizedBox(
                                         height: 20.0,
@@ -214,11 +215,13 @@ class _InteractiveCardState extends State<InteractiveCard>
                                       Flexible(
                                         child: Text(
                                           widget.description ??
-                                              'Lorem ipsum dolor sit amet. A cumque molestias quo dolores consequatur et rerum nihil ea vitae eligendi et itaque iste. Ea fugiat eaque quo odit tempora qui unde iure sed repellat voluptatem. Eum perferendis galisum sed saepe itaque qui soluta amet id fugiat sequi aut necessitatibus blanditiis ex ipsum perspiciatis qui voluptatem enim.',
+                                              'Lorem ipsum dolor sit amet. Ea fugiat eaque quo odit tempora qui unde iure sed repellat voluptatem. Eum perferendis galisum sed saepe itaque qui soluta amet id fugiat.',
+                                          
                                           style: GoogleFonts.comfortaa(
                                               fontWeight: FontWeight.w500,
                                               color: Colors.black87,
-                                              fontSize: 15.0),
+                                              height: 1.2,
+                                              fontSize: 17.0,),
                                         ),
                                       ),
                                     ],
@@ -227,9 +230,8 @@ class _InteractiveCardState extends State<InteractiveCard>
                               ),
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      
                   ],
                 ),
               ),
